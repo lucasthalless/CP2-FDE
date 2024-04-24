@@ -2,14 +2,18 @@ let stopwatchCurrentTime = 0;
 
 let timer;
 
+function updateTimer() {
+  document.getElementById("stopwatch").innerHTML = new Date(
+    stopwatchCurrentTime * 1000
+  )
+    .toISOString()
+    .substring(11, 22)
+    .replace(".", ":");
+}
+
 function start() {
   timer = setInterval(() => {
-    document.getElementById("stopwatch").innerHTML = new Date(
-      stopwatchCurrentTime * 1000
-    )
-      .toISOString()
-      .substring(11, 22)
-      .replace(".", ":");
+    updateTimer();
     stopwatchCurrentTime = stopwatchCurrentTime + 0.01;
   }, 10);
 }
@@ -20,12 +24,7 @@ function stop() {
 
 function reset() {
   stopwatchCurrentTime = 0;
-  document.getElementById("stopwatch").innerHTML = new Date(
-    stopwatchCurrentTime * 1000
-  )
-    .toISOString()
-    .substring(11, 22)
-    .replace(".", ":");
+  updateTimer();
 }
 
 function markTime() {
